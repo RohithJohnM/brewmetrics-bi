@@ -98,10 +98,19 @@ table Fact_Sales
 			CALCULATE(
 				SUM(Fact_Sales[sales_amount]),
 				FILTER(
-					ALL(Dim_Date[date])
+					ALL(Dim_Date[date]),
 					Dim_Date[date] <= CurrentDate
 				)
 			)
+
+	measure 'Item Sales Rank' =
+		RANKX(
+			ALL(Fact_Sales[item]),
+			CALCULATE(SUM(Fact_Sales[sales_amount])),
+			,
+			DESC,
+			Dense
+		)
 
 	partition Fact_Sales = m
 		mode: import
