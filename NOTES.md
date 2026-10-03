@@ -36,3 +36,16 @@ The suggested measure was directly usable. RANKX correctly evaluates each item a
 
 ### Final Measure
 Item Sales Rank
+
+---
+
+## Measure 4: Average Sale Amount
+
+### Copilot's Initial Suggestion
+Copilot suggested calculating the average sale amount by dividing the total sales amount using SUM(Fact_Sales[sales_amount]) by the distinct number of sales using DISTINCTCOUNT(Fact_Sales[sale_id]). It used DIVIDE to safely handle cases where there are no sales.
+
+### Review / Correction
+The suggested measure was directly usable. DIVIDE safely handles a zero or blank denominator, while DISTINCTCOUNT provides the number of unique sales.
+
+### Final Measure
+Average Sale Amount
