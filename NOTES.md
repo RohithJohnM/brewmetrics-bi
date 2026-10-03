@@ -23,3 +23,16 @@ The initial suggestion used ALL(Dim_Date), which removes filters from the entire
 
 ### Final Measure
 Cumulative Sales
+
+---
+
+## Measure 3: Item Sales Rank
+
+### Copilot's Initial Suggestion
+Copilot suggested using RANKX over all items in Fact_Sales[item], with total sales calculated using SUM(Fact_Sales[sales_amount]). It used descending order so that the item with the highest sales receives rank 1 and used Dense ranking for ties.
+
+### Review / Correction
+The suggested measure was directly usable. RANKX correctly evaluates each item against all available items, while DESC ensures that the highest-sales item receives rank 1. Dense ranking handles ties without gaps in the ranking sequence.
+
+### Final Measure
+Item Sales Rank
