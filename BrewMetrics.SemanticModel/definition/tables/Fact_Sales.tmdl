@@ -112,6 +112,12 @@ table Fact_Sales
 			Dense
 		)
 
+	measure 'Average Sale Amount' =
+		DIVIDE(
+			SUM(Fact_Sales[sales_amount]),
+			DISTINCTCOUNT(Fact_Sales[sale_id])
+		)
+
 	partition Fact_Sales = m
 		mode: import
 		source =
