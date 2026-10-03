@@ -81,6 +81,17 @@ table Fact_Sales
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
+	measure 'Month-over-Month Sales Growth %' =
+		VAR CurrentMonthSales = SUM(Fact_Sales[sales_amount])
+		VAR PreviousMonthSales =
+			CALCULATE(
+				SUM(Fact_Sales[sales_amount]),
+				PREVIOUSMONTH(Dim_Date[date])
+			)
+		RETURN
+			DIVIDE(CurrentMonthSales - PreviousMonthSales, PreviousMonthSales)
+		formatString: 0.00%;-0.00%;-
+
 	partition Fact_Sales = m
 		mode: import
 		source =
