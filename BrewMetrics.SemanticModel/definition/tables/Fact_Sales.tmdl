@@ -92,6 +92,17 @@ table Fact_Sales
 			DIVIDE(CurrentMonthSales - PreviousMonthSales, PreviousMonthSales)
 		formatString: 0.00%;-0.00%;-
 
+	measure 'Cumulative Sales' =
+		VAR CurrentDate = MAX(Dim_Date[date])
+		RETURN
+			CALCULATE(
+				SUM(Fact_Sales[sales_amount]),
+				FILTER(
+					ALL(Dim_Date[date])
+					Dim_Date[date] <= CurrentDate
+				)
+			)
+
 	partition Fact_Sales = m
 		mode: import
 		source =
