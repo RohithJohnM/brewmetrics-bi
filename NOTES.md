@@ -10,3 +10,16 @@ The suggested measure was directly usable. The Dim_Date table is related to Fact
 
 ### Final Measure
 Month-over-Month Sales Growth %
+
+---
+
+## Measure 2: Cumulative Sales
+
+### Copilot's Initial Suggestion
+Copilot suggested a cumulative sales measure using MAX(Dim_Date[date]) to identify the current date and FILTER with ALL(Dim_Date) to include all dates up to the current date.
+
+### Review / Correction
+The initial suggestion used ALL(Dim_Date), which removes filters from the entire date dimension. I changed this to ALL(Dim_Date[date]) so that only the date-column filter is removed while other date-dimension filters can remain in the filter context.
+
+### Final Measure
+Cumulative Sales
